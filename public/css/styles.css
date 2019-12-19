@@ -1,16 +1,3 @@
-.container{
-    background-color: white;
-    /* font-family: 'Roboto Slab', serif; */
-    font-family: 'Open Sans', sans-serif;
-    min-height: 100%;
-    height: 100%;
-
-}
-
-/* .content{
-    background-color: #0e94b3;
-} */
-
 html {
   height: 100%;
 }
@@ -20,9 +7,28 @@ body{
     height: 100%;
 }
 
+.content-container{
+    min-height: 100%;
+
+}
+
+.container{
+    background-color: white;
+    /* font-family: 'Roboto Slab', serif; */
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.card{
+    background-color: #0e94b3;
+}
+
+
+
 .username{
     color: orange;
-    font-weight: bold;
+    
+    font-weight: bolder;
 }
 
 .card-title{
@@ -59,5 +65,11 @@ body{
 
 .modal-backdrop
 {
-    opacity:0.8 !important;
+    opacity:0.9 !important;
+}
+
+#error-message{
+    color: red;
+    font-weight: bold;
+    visibility: hidden;
 }

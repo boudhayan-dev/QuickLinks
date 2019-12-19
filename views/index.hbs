@@ -29,24 +29,25 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container content-container">
         <br>
         <div class="row">
             <div class="col md-8">
-                <h2><span class="username">{{user.name}}'s</span> QuickLinks</h2>    
+                <h2><span class="username" >{{user.name}}'s</span> QuickLinks</h2>    
                 
             </div>
             <div class="col md-2 offset-2">
+                    <button type="button" class="btn mr-2 btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#deleteProfile">Delete Profile</button>
                     <button type="button" class="btn mr-2 btn-outline-danger btn-sm float-right">Logout</button>
-                    <button type="button" class="btn mr-2 btn-outline-success btn-sm float-right" data-toggle="modal" data-target="#exampleModal">Add</button>
-                
+                    <button type="button" class="btn mr-2 btn-outline-success btn-sm float-right" data-toggle="modal" data-target="#addLinkModal">Add</button>
+                    
             </div>
             
         </div>
         <hr>
         
         
-        <div class="row content">
+        <div class="row">
             <div class="col-md-12 ">
                 <div class="card-columns">
                     {{#each quickLinks}}
@@ -79,64 +80,26 @@
 
 
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="addLinkModal" tabindex="-1" role="dialog" aria-labelledby="Add new Link"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered " role="document">
                 <div class="modal-content">
-                    {{!-- <div class="modal-header text-center">
-                        <h4 class="modal-title w-100">Add New Page</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div> --}}
-                    {{!-- <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="pageLink">Link</label>
-                                <input type="text" class="form-control" id="pageLink" placeholder="https://example.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="pageName">Name</label>
-                                <input type="text" class="form-control" id="pageName" placeholder="My Cool Page !">
-                                
-                            </div>
-                            <div class="form-group">
-                                <label for="pageDesc">Description</label>
-                                <textarea id="pageDesc" class="md-textarea form-control" rows="3"></textarea>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                                <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                                <div class="invalid-feedback">Example invalid custom file feedback</div>
-                            </div>
-                        </form>
-                    </div> --}}
-                    {{!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-outline-dark" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-sm btn-outline-success">Save</button>
-                    </div> --}}
-
-                    <!-- Default form login -->
-                    <form class="text-center border border-light p-5" action="#!">
-                        {{!-- <p class="h4 mb-4">Add new link</p> --}}
-                        <h3 class="mb-4">Add new link</h3>
+                    <form class="submitForm text-center border border-light p-5" action="/">
+                        <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Add new link</h3>
                         <input type="text" id="pageLink" class="form-control" placeholder="Link" required>
                         <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
                             Enter the link of the website
                         </small>
-
                         <input type="text" id="pageName" class="form-control mb-4" placeholder="Name" required>
                         <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
                             Enter the name of the website
                         </small>
-
                         <div class="form-group">
                             <textarea class="form-control rounded-0" id="pageDescription" rows="3" placeholder="Description"></textarea>
                             <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
                                 Enter the description of the website
                             </small>
                         </div>
-
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="pageImage" placeholder="Choose cover image">
                             <label class="custom-file-label help-text" for="pageImage"></label>
@@ -144,29 +107,43 @@
                                 Provide a cover image (Optional)
                             </small>
                         </div>
-
-                    
-                        <!-- Sign in button -->
-                        <button class="btn btn-info btn-block my-4"  type="submit">Add</button>
-                    
+                        <button class="btn btn-info btn-block my-4"   type="submit">Add</button>
+                        <span id="error-message">Uh ho! Something went wrong. Try again.</span>
                     </form>
-                    <!-- Default form login -->
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+        <div class="modal fade" id="deleteProfile" tabindex="-1" role="dialog" aria-labelledby="Delete Profile"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " role="document">
+                <div class="modal-content">
+                            <form class="submitForm text-center border border-light p-5" action="/">
+                                <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Delete Profile</h3>          
+                                <div class="form-group mb-4">
+                                    <p class="mb-4" style="font-size: medium; ">This will delete your profile and along with that the links that you have saved. This is an irreversible process. Do you want to continue ?</p>                     
+                                </div>
+                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
+                                <button type="button" class="btn btn-sm btn-info" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
         
         
     </div>
 
 
-    <script>
-        $('#pageImage').on('change', function () {
-            //get the file name
-            var fileName = $(this).val();
-            //replace the "Choose a file" label
-            $(this).next('.custom-file-label').html(fileName);
-        })
-    </script>
+    <script src="/js/index.js"></script>
 </body>
 
 </html>

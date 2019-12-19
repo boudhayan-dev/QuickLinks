@@ -6,20 +6,25 @@ app.set("view engine", "hbs")
 const publicDirectoryPath = path.join(__dirname, '../public')
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
+// app.use(express.json())
+app.use(express.json())
 
 app.get("", (req, res) => {
-    let quickLinks = [{
-        "name": "DEV Community  👩‍💻👨‍💻",
-        "link": "https://dev.to",
-        "description": "DEV Community is a page i follow",
-        "headerImage":""
-    },
+    let quickLinks = [
+    
     {
         "name": "Hacker News",
         "link": "https://news.ycombinator.com",
         "description": "Stay up to date with news Stay up to date with news Stay up to date with news Stay up to date with news",
         "headerImage":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAAFoCAMAAABJ+DwrAAAAV1BMVEX/iFb/////7+j/v6T/wab/39H/jFv/sZD/yrP/4tX/w6n/nHL/m3D/+fb/9O7/6N7/pYD/oHf/k2b/jl7//Pr/0r//l2v/uZz/2sv/1sX/tZb/rIn/ili9np4bAAAD/ElEQVR4Ae3dxUJcaRSF0V2GxV3f/8XiUoI79Kwlfe8A5z+11pzoByG75AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACW1SBL5+lB+qzPc0Eff6fPyUm6vdlMr+PT9Lvoj7e2yNIZZ+lsn6XPeS7q5/HFv1bMTtLv6cUj3DpMt5Msn2G4V84/pg5Bs3WcQgTN/ovUIWi2d1OIoHn4MAi6jqmgBV3Kj6dB0IWcB0EXsvUmN0/QmO4EjelO0Dx8HQRdx3SYmydoTHeCxnQnaLbeB0EXsvMiN07QmO4EjelO0ExHQdCFfDfdCdp0J2hMd4LGdCdoTHeCNt0haNOdoDHdCRrTnaAx3QnadIegK9jeD4IuZKNnukPQpjtBY7oTNKY7QfPGdCfoSrZemu4EXcnpQ9OdoAuZ9YU7ep32CJrhIJ12RmmPoDmamO4EXcnhmulO0JX0Bb21mvYImnnfdLf6IndK0JjuBM1s7wrTHeP8g5OHuaDJItdtdH6eLjsPcyGC5mw3d+/ow9ee6e7ZPDT3LQdfxul2kAYJmpW+oFfTHkGz2xfu8UraI2g2HqbT+TjtETSzjXQbPU97BM3Es+4EXcnnd+n2+1naI2i+vDHdCbqSnRemO0EXsrNjuhN0JQ8eme4EXch03XQn6Eomj013gi7k88B0J+hKFqY7QZdyZroTdCU/l2O6E7Tp7iztETTTh+m2/jwIuj1fTXelgsZ0d0Hj/IPhWi5oZZEbtXj33XR32aAZ7+aCjnPDTl9Me6a7w+Bbjub83DPdVQqa9b7p7jQIuj3Tw3TbeB4E3Z7DNdNdpaBZM91VC9p7oJvu6gftPdAPPqQQQTtf+G0lCLo9w4HprlDQHE1Md4I23Qm6Oaa7BylE0Ka7oxQiaNPdyYcg6PbM9kx3lYJmZLqrFDRH79JtYyV1CNr5wp2tIOgGraQWQTtfWIugnS8sRdDOF9YiaOcLSxG084W1CNr5wloE7XxhKYJ2vrAWQXsP9FIE7XxhLYJ2vrAUQTtfWIugnS+sRdDOF5YiaOcLEbTpTtANcL6wAkE7X1iIoBmkEEGzeJtCBM3pi5QiaOcLaxG084WlCNr5wkIEzeHjIGh/df5UGuA90CsStPdAZxxaNRunFl+hnS8sRdDOF9YiaOcLCxE0dxC0oDHdCRrTnaCdLyxA0M4XlgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwFzesyUvtAbkUAAAAAElFTkSuQmCC"
-    },
+        }, 
+    
+        {
+            "name": "DEV Community  👩‍💻👨‍💻",
+            "link": "https://dev.to",
+            "description": "DEV Community is a page i follow",
+            "headerImage": ""
+        },
     {
         "name": "DZone",
         "link": "https://dzone.com",
@@ -44,6 +49,11 @@ app.get("", (req, res) => {
 })
 
 
+app.post("/add",(req,res)=>{
+    console.log(req.body)
+    return res.sendStatus(200);
+    
+})
 
 app.listen(3000, () => {
     console.log("Started on port 3000");
