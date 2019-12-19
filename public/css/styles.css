@@ -1,0 +1,63 @@
+.container{
+    background-color: white;
+    /* font-family: 'Roboto Slab', serif; */
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100%;
+    height: 100%;
+
+}
+
+/* .content{
+    background-color: #0e94b3;
+} */
+
+html {
+  height: 100%;
+}
+
+body{
+    background-color: #f5f0f0;
+    height: 100%;
+}
+
+.username{
+    color: orange;
+    font-weight: bold;
+}
+
+.card-title{
+    font-weight: 500;
+}
+
+.card-button{
+    width: 130px;
+}
+
+
+/* .card-img-top{
+    border-radius: 12px;
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+} */
+
+
+/* .logout{
+
+} */
+
+
+.modal-header{
+    border-radius: 3px 3px 0 0;
+    color: black;
+    background-color: #f2f2f2;
+}
+
+.help-text{
+    text-align: left;
+}
+
+.modal-backdrop
+{
+    opacity:0.8 !important;
+}
