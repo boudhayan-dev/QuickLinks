@@ -1,0 +1,103 @@
+{{>header}}
+<body>
+    <div class="container content-container">
+        <br>
+        <div class="row">
+            <div class="col md-8">
+                <h2><span class="username">{{user.name}}'s</span> QuickLinks</h2>
+            </div>
+            <div class="col md-2 offset-2">
+                <button type="button" class="btn mr-2 btn-outline-danger btn-sm float-right" data-toggle="modal"
+                    data-target="#deleteProfile">Delete Profile</button>
+                <button type="button" class="btn mr-2 btn-outline-danger btn-sm float-right">Logout</button>
+                <button type="button" class="btn mr-2 btn-outline-success btn-sm float-right" data-toggle="modal"
+                    data-target="#addLinkModal">Add</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="card-columns">
+                    {{#each quickLinks}}
+                    <div class="card  shadow p-3 mb-3 bg-white rounded">
+                        {{#if this.headerImage}}
+                        <img class="card-img-top" src="{{this.headerImage}}" alt="Card image cap">
+                        {{/if}}
+                        <div class="card-body">
+                            <h4 class="card-title">{{this.name}}</h3>
+                                <hr>
+                                <p class="card-text">{{this.description}}</p>
+                                <hr>
+
+                                <a href="{{this.link}}" target="_blank"
+                                    class="card-button btn btn-brand btn-outline-info btn-sm float-left">
+                                    <img height="22" width="22" class="rounded-circle" src="{{this.link}}/favicon.ico"
+                                        onerror=this.src="/img/noimage.ico"><span> Launch</span>
+                                </a>
+                                <button type="button"
+                                    class=" card-button btn btn-brand btn-outline-danger btn-sm float-right">
+                                    <img height="18" width="20" src="/img/delete.svg" alt=""> Delete
+                                </button>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addLinkModal" tabindex="-1" role="dialog" aria-labelledby="Add new Link"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " role="document">
+                <div class="modal-content">
+                    <form class="submitForm text-center border border-light p-5" action="/">
+                        <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Add new link</h3>
+                        <input type="text" id="pageLink" class="form-control" placeholder="Link" required>
+                        <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
+                            Enter the link of the website
+                        </small>
+                        <input type="text" id="pageName" class="form-control mb-4" placeholder="Name" required>
+                        <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
+                            Enter the name of the website
+                        </small>
+                        <div class="form-group">
+                            <textarea class="form-control rounded-0" id="pageDescription" rows="3"
+                                placeholder="Description"></textarea>
+                            <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
+                                Enter the description of the website
+                            </small>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="pageImage"
+                                placeholder="Choose cover image">
+                            <label class="custom-file-label help-text" for="pageImage"></label>
+                            <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
+                                Provide a cover image (Optional)
+                            </small>
+                        </div>
+                        <button class="btn btn-info btn-block my-4" type="submit">Add</button>
+                        <span id="error-message">Uh ho! Something went wrong. Try again.</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteProfile" tabindex="-1" role="dialog" aria-labelledby="Delete Profile"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " role="document">
+                <div class="modal-content">
+                    <form class="submitForm text-center border border-light p-5" action="/">
+                        <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Delete Profile</h3>
+                        <div class="form-group mb-4">
+                            <p class="mb-4" style="font-size: medium; ">This will delete your profile and along with
+                                that the links that you have saved. This is an irreversible process. Do you want to
+                                continue ?</p>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
+                        <button type="button" class="btn btn-sm btn-info" data-dismiss="modal"
+                            aria-label="Close">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/index.js"></script>
+</body>
+{{>footer}}

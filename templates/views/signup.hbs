@@ -1,0 +1,37 @@
+{{>header}}
+<body>
+    <div class="container content-container">
+        <div class="modal fade" id="signupModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            role="dialog" aria-labelledby="Sign Up" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " role="document">
+                <div class="modal-content">
+                    <form class="signupForm text-center border border-light p-5" action="/">
+                        <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Sign Up</h3>
+                        <input type="text" id="username" class="form-control" placeholder="Username" required>
+                        <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
+                            Enter your username
+                        </small>
+                        <input type="password" id="password" class="form-control" placeholder="Password" required>
+                        <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
+                            Enter your password
+                        </small>
+                        <input type="password" id="confirm-password" class="form-control" placeholder="Confirm Password"
+                            required>
+                        <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
+                            Enter your password again
+                        </small>
+
+                        <button class="btn btn-info btn-block" type="submit">Sign Up</button>
+                        <small id="loginLink" class="help-text form-text text-muted mb-4">
+                            Already a member ? <a href="/login">Login</a>
+                        </small>
+                        <span id="error-message">Uh ho! Something went wrong. Try again.</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="/js/signup.js"></script>
+</body>
+{{>footer}}

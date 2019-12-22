@@ -25,6 +25,7 @@ body{
 
 
 
+
 .username{
     color: orange;
     
@@ -72,4 +73,17 @@ body{
     color: red;
     font-weight: bold;
     visibility: hidden;
+}
+
+
+
+
+#signUpLink{
+    display: block;
+    text-align: center;
+}
+
+#loginLink{
+    display: block;
+    text-align: center;
 }

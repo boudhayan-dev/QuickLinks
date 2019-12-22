@@ -1,13 +1,25 @@
+require('dotenv').config();
 const express = require("express");
 const path = require('path')
-
 const app = express()
-app.set("view engine", "hbs")
+const hbs = require("hbs")
+
+
+
 const publicDirectoryPath = path.join(__dirname, '../public')
-// Setup static directory to serve
+const viewsPath = path.join(__dirname, "../templates/views")
+const partialsPath = path.join(__dirname, "../templates/partials")
+
+
+app.set("view engine", "hbs")
 app.use(express.static(publicDirectoryPath))
-// app.use(express.json())
+app.set("views",viewsPath)
+hbs.registerPartials(partialsPath)
 app.use(express.json())
+
+
+
+
 
 app.get("", (req, res) => {
     let quickLinks = [
@@ -49,11 +61,22 @@ app.get("", (req, res) => {
 })
 
 
+app.get("/signup",(req,res)=>{
+    res.render('signup');
+})
+
+app.get("/login",(req,res)=>{
+    res.render("login")
+})
+
+// add new items
 app.post("/add",(req,res)=>{
     console.log(req.body)
     return res.sendStatus(200);
     
 })
+
+
 
 app.listen(3000, () => {
     console.log("Started on port 3000");
