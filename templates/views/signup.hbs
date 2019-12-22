@@ -5,21 +5,24 @@
             role="dialog" aria-labelledby="Sign Up" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered " role="document">
                 <div class="modal-content">
-                    <form class="signupForm text-center border border-light p-5" action="/">
+                    <form class="signupForm text-center border border-light p-5" action="/signup" method="post" >
                         <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Sign Up</h3>
-                        <input type="text" id="username" class="form-control" placeholder="Username" required>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
                         <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
                             Enter your username
                         </small>
-                        <input type="password" id="password" class="form-control" placeholder="Password" required>
+
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
+                        <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
+                            Enter your Email
+                        </small>
+
+
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                         <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
                             Enter your password
                         </small>
-                        <input type="password" id="confirm-password" class="form-control" placeholder="Confirm Password"
-                            required>
-                        <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
-                            Enter your password again
-                        </small>
+                        
 
                         <button class="btn btn-info btn-block" type="submit">Sign Up</button>
                         <small id="loginLink" class="help-text form-text text-muted mb-4">

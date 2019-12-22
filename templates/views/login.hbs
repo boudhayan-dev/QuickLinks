@@ -6,13 +6,13 @@
             aria-labelledby="Sign Up" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered " role="document">
                 <div class="modal-content">
-                    <form class="signupForm text-center border border-light p-5" action="/">
+                    <form class="signupForm text-center border border-light p-5" action="/login" method="POST">
                         <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Login</h3>
-                        <input type="text" id="username" class="form-control" placeholder="Username" required>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Username" required>
                         <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
                             Enter your username
                         </small>
-                        <input type="password" id="password" class="form-control" placeholder="Password" required>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                         <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
                             Enter your password
                         </small>
@@ -21,7 +21,12 @@
                         <small id="signUpLink" class="help-text form-text text-muted mb-4">
                             Not a member ? <a href="/signup">Sign Up</a>
                         </small>
-                        <span id="error-message">Uh ho! Something went wrong. Try again.</span>
+                        
+                        {{#if errorMessage}}
+                        <span id="error-message">{{errorMessage}}</span>
+                        {{/if}}
+
+                        
                     </form>
                 </div>
             </div>
