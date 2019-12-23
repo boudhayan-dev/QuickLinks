@@ -4,8 +4,7 @@ let LinkSchema = new mongoose.Schema({
     link: {
         type: String,
         required: true,
-        trim: true,
-        unique: true
+        trim: true
     },
 
     name: {

@@ -1,3 +1,3 @@
-   $(window).on('load',function(){
+$(window).on('load',function(){
        $('#signupModal').modal('show');
 });

@@ -4,7 +4,6 @@ const validUrl = require("valid-url")
 
 const Links = require("../models/Links");
 const User = require("../models/User");
-const UserRepository = require("../repository/UserRepository")
 
 
 
@@ -40,6 +39,9 @@ router.get("/dashboard", isLoggedIn, async (req, res) => {
 // sign-up page
 router.route("/signup")
     .get(function (req, res) {
+        if (req.isAuthenticated()) {
+            return res.redirect("dashboard")
+        }
         res.render('signup');
     })
     .post(function (req,res,next){
@@ -70,6 +72,9 @@ router.route("/signup")
 // login page
 router.route("/login")
       .get(function(req,res){
+          if(req.isAuthenticated()){
+              return res.redirect("dashboard")
+          }
           res.render("login")
       })
       .post(function(req,res,next){
@@ -112,7 +117,6 @@ router.post("/add", isLoggedIn, async (req, res) => {
             "errorMessage": "Missing mandatory fields"
         })
     }
-
     // check for valid url
     if(!validUrl.isUri(payload.link)){
         console.log("malfirmed url")
@@ -120,7 +124,13 @@ router.post("/add", isLoggedIn, async (req, res) => {
             "errorMessage": "Malformed URL"
         })
     }
-
+    // check if link already exists in db for user
+    let existingLink = await Links.findOne({ link:payload.link, user:req.user.id })
+    if(existingLink){
+        return res.send({
+            "errorMessage": "You have already saved this link."
+        })
+    }
     // Error if image size is more than 5 mb
     let imageSize = new Buffer(payload.imageB64, 'base64').length
     if((imageSize/(1e+6))>5){
@@ -142,29 +152,43 @@ router.post("/add", isLoggedIn, async (req, res) => {
         return res.send( {
             "errorMessage": "Something went wrong ! Try again"
         })
-    }
-    
+    } 
 })
 
 
 
-router.delete("/deleteLink", async(req,res)=>{
+router.delete("/deleteLink", isLoggedIn, async(req,res)=>{
     try {
-        await Links.findOneAndDelete({ link:req.body.link, user:req.user.id });
-        return res.sendStatus(200).send({
+        await Links.deleteMany({ link:req.body.link, user:req.user.id });
+        return res.status(200).send({
             "status":"successfully deleted"
         })
     } catch (error) {
-        return res.sendStatus(400).send({
+        return res.status(400).send({
             "errorMessage":"Something went wrong while deleting"
         })
     }
 })
 
 
+router.post("/deleteUserProfile", isLoggedIn, async(req,res)=>{
+    // delete user from database
+    try {
+        await Links.deleteMany({ user:req.user.id })
+        await User.findByIdAndDelete(req.user.id)
+        req.logout();
+        req.session.destroy();
+        return res.redirect('/login');
+    } catch (error) {
+        console.log("Error deleting profile")
+        return res.render("dashboard")
+    } 
+})
+
+
 router.all("*",(req,res)=>{
     if (req.isAuthenticated()) {
-        res.redirect("/dashboard")
+        res.render("/dashboard")
     }
     return res.redirect("/signup")
 })

@@ -74,8 +74,8 @@ $(".submitForm").submit(async function (oEvent) {
 
 
 // Delete a link
-async function deleteLink(button) {
-    let link = button.getAttribute('name').trim()
+$(".deleteLink").click(async function(oEvent) {
+    let link = this.name;
     let payload = { link };
     let config = {
         method: "DELETE",
@@ -85,11 +85,17 @@ async function deleteLink(button) {
         body: JSON.stringify(payload)
     }
     let response = await makeRequest("/deleteLink", config)
-    console.log(response.payload)
     if ("errorMessage" in response.payload) {
         console.log(response.payload.errorMessage)
         return
 
     }
     location.reload()
-}
+    
+})
+
+
+
+$(".deleteUserProfile").click(function () {
+    console.log("Delete user profile")
+})

@@ -36,7 +36,8 @@
                                         class="btn btn-brand btn-outline-info btn-m" id="linkVal">
                                         <i class="fa fa-external-link " aria-hidden="true"> Open</i>    
                                     </a>
-                                    <button  type="button" name="{{this.link}}" class=" btn btn-brand btn-outline-danger btn-m" id="deleteLink" onclick="deleteLink(this);">
+                                    {{!-- onclick="deleteLink(this);" --}}
+                                    <button  type="button" name="{{this.link}}" class="deleteLink btn btn-brand btn-outline-danger btn-m">
                                         <i class="fa fa-trash" aria-hidden="true"> Link</i>
                                     </button>
                                     
@@ -86,16 +87,17 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered " role="document">
                 <div class="modal-content">
-                    <form class="submitForm text-center border border-light p-5" action="/">
+                    <form class="text-center border border-light p-5" action="/deleteUserProfile" method="POST">
                         <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Delete Profile</h3>
                         <div class="form-group mb-4">
                             <p class="mb-4" style="font-size: medium; ">This will delete your profile and along with
                                 that the links that you have saved. This is an irreversible process. Do you want to
                                 continue ?</p>
                         </div>
-                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
-                        <button type="button" class="btn btn-sm btn-info" data-dismiss="modal"
-                            aria-label="Close">Cancel</button>
+                        
+                            <button type="submit" class="btn btn-sm btn-danger mr-1">Delete</a>
+                            <button type="button" class="btn btn-sm btn-info" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        
                     </form>
                 </div>
             </div>
