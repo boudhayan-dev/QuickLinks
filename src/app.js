@@ -10,15 +10,14 @@ const mongodbStore = require('connect-mongo')(session);
 
 
 const router = require("./router/routes");
-
-const publicDirectoryPath = path.join(__dirname, '../public')
+const staticPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, "../templates/views")
 const partialsPath = path.join(__dirname, "../templates/partials")
 
 
 app.set("view engine", "hbs")
 app.set("views", viewsPath)
-app.use(express.static(publicDirectoryPath))
+app.use(express.static(staticPath))
 hbs.registerPartials(partialsPath)
 // Accept json as well as form data
 app.use(express.json())

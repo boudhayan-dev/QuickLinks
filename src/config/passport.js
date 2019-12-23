@@ -34,15 +34,12 @@ passport.use('local-signup', new LocalStrategy({
 },
     function (req, email, password, done) {
         process.nextTick(function () {
-            console.log("REQ object from form -")
-            console.log(JSON.stringify(req.body))
             User.findOne({ email: email }, function (err, user) {
                 if (err) {
                     return err.message;
                 }
                 if (user) {
-                    console.log('user already exists');
-                    return done(null, false, { error: 'user already exists' });
+                    return done(null, false, { error: 'Please use a different email' });
                 }
                 else {
                     let newUser = new User();
@@ -77,12 +74,12 @@ passport.use('local-login', new LocalStrategy({
             }
             if (!user) {
                 return done(null, false, {
-                    error: "User does not exist"
+                    error: "Uh ho! you are not registered with us. Please sign up."
                 });
             }
 
             if (!user.validPassword(password)) {
-                return done(null, false, { error: 'Invalid password try again' });
+                return done(null, false, { error: 'Invalid password try again !' });
             }
             return done(null, user);
         });

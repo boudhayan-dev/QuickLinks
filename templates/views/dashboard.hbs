@@ -2,42 +2,45 @@
 <body>
     <div class="container content-container">
         <br>
-        <div class="row">
-            <div class="col md-8">
-                <h2><span class="username">{{user.name}}'s</span> QuickLinks</h2>
-            </div>
-            <div class="col md-2 offset-2">
-                <button type="button" class="btn mr-2 btn-outline-danger btn-sm float-right" data-toggle="modal"
-                    data-target="#deleteProfile">Delete Profile</button>
-                <a href="/logout" role="button" class="btn mr-2 btn-outline-danger btn-sm float-right">Logout</a>
-                <button type="button" class="btn mr-2 btn-outline-success btn-sm float-right" data-toggle="modal"
-                    data-target="#addLinkModal">Add</button>
-            </div>
-        </div>
+        <nav class="navbar navbar-light">
+            <h2><span class="username">{{username}}'s</span> QuickLinks</h2>
+            <form class="form-inline">
+                <a href="" role="button" class="btn mr-2 btn-outline-info btn-sm " data-toggle="modal"
+                    data-target="#addLinkModal"><i class="fa fa-plus-circle" aria-hidden="true"> Link</i></a>
+                <a href="/logout" role="button" class="btn mr-2 btn-outline-danger btn-sm">
+                    <i class="fa fa-sign-out" aria-hidden="true"> Logout</i></a>
+                <a href="" role="button" class="btn mr-2 btn-outline-danger btn-sm" data-toggle="modal"
+                    data-target="#deleteProfile"><i class="fa fa-trash" aria-hidden="true"> Profile</i></a>
+                
+            </form>
+            {{!-- <button type="button" class="btn btn-success" aria-label="Left Align">
+                <span class="fa fa-align-left" aria-hidden="true"> adds</span>
+            </button> --}}
+        </nav>
         <hr>
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card-columns">
                     {{#each quickLinks}}
                     <div class="card  shadow p-3 mb-3 bg-white rounded">
-                        {{#if this.headerImage}}
-                        <img class="card-img-top" src="{{this.headerImage}}" alt="Card image cap">
+                        {{#if this.imageB64}}
+                        <img class="card-img-top" src="{{this.imageB64}}" alt="Card image cap">
                         {{/if}}
                         <div class="card-body">
                             <h4 class="card-title">{{this.name}}</h3>
                                 <hr>
                                 <p class="card-text">{{this.description}}</p>
                                 <hr>
-
-                                <a href="{{this.link}}" target="_blank"
-                                    class="card-button btn btn-brand btn-outline-info btn-sm float-left">
-                                    <img height="22" width="22" class="rounded-circle" src="{{this.link}}/favicon.ico"
-                                        onerror=this.src="/img/noimage.ico"><span> Launch</span>
-                                </a>
-                                <button type="button"
-                                    class=" card-button btn btn-brand btn-outline-danger btn-sm float-right">
-                                    <img height="18" width="20" src="/img/delete.svg" alt=""> Delete
-                                </button>
+                                <div class="btn-wrapper text-center">
+                                    <a href="{{this.link}}" target="_blank"
+                                        class="btn btn-brand btn-outline-info btn-m" id="linkVal">
+                                        <i class="fa fa-external-link " aria-hidden="true"> Open</i>    
+                                    </a>
+                                    <button  type="button" name="{{this.link}}" class=" btn btn-brand btn-outline-danger btn-m" id="deleteLink" onclick="deleteLink(this);">
+                                        <i class="fa fa-trash" aria-hidden="true"> Link</i>
+                                    </button>
+                                    
+                                </div>
                         </div>
                     </div>
                     {{/each}}
@@ -48,33 +51,33 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered " role="document">
                 <div class="modal-content">
-                    <form class="submitForm text-center border border-light p-5" action="/">
+                    <form class="submitForm text-center border border-light p-5">
                         <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Add new link</h3>
-                        <input type="text" id="pageLink" class="form-control" placeholder="Link" required>
+                        <input type="text" id="pageLink" name="link" class="form-control" placeholder="Link" required>
                         <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
                             Enter the link of the website
                         </small>
-                        <input type="text" id="pageName" class="form-control mb-4" placeholder="Name" required>
+                        <input type="text" id="pageName" name="name" class="form-control mb-4" placeholder="Name" required>
                         <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
                             Enter the name of the website
                         </small>
                         <div class="form-group">
-                            <textarea class="form-control rounded-0" id="pageDescription" rows="3"
+                            <textarea name="description" class="form-control rounded-0" id="pageDescription" rows="3"
                                 placeholder="Description"></textarea>
                             <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
-                                Enter the description of the website
+                                Enter the description of the website (Optional)
                             </small>
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="pageImage"
+                            <input type="file" name="imageB64" class="custom-file-input" id="pageImage"
                                 placeholder="Choose cover image">
                             <label class="custom-file-label help-text" for="pageImage"></label>
                             <small id="passwordHelpBlock" class="help-text form-text text-muted mb-4">
                                 Provide a cover image (Optional)
                             </small>
                         </div>
-                        <button class="btn btn-info btn-block my-4" type="submit">Add</button>
-                        <span id="error-message">Uh ho! Something went wrong. Try again.</span>
+                        <button class="btn btn-info btn-block my-4" type="submit" >Add</button>
+                        <small id="linkAddError" class="form-text mb-4"></small>
                     </form>
                 </div>
             </div>
@@ -98,6 +101,6 @@
             </div>
         </div>
     </div>
-    <script src="/js/index.js"></script>
+    <script src="/js/dashboard.js"></script>
 </body>
 {{>footer}}

@@ -19,7 +19,8 @@
     "hbs": "^4.0.6",
     "mongoose": "^5.8.2",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

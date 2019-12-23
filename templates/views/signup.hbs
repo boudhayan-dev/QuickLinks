@@ -28,7 +28,9 @@
                         <small id="loginLink" class="help-text form-text text-muted mb-4">
                             Already a member ? <a href="/login">Login</a>
                         </small>
-                        <span id="error-message">Uh ho! Something went wrong. Try again.</span>
+                        {{#if errorMessage}}
+                        <small id="error-message" class="form-text mb-4">{{errorMessage}}</small>
+                        {{/if}}
                     </form>
                 </div>
             </div>

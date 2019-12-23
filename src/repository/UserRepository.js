@@ -1,11 +1,11 @@
 
-const UserModel = require('../models/User');
+const User = require('../models/User');
 
 
 
 
 async function createUser(payload) {
-    let user = new UserModel(payload)
+    let user = new User(payload)
     try {
         await user.save()
         return { 
@@ -23,7 +23,7 @@ async function createUser(payload) {
 
 
 async function findUser(payload) {
-    let user = await UserModel.find({email:payload.email})
+    let user = await User.find({email:payload.email})
     if(user){
         return user
     }
@@ -38,12 +38,12 @@ async function findUser(payload) {
 
 
 async  function findAllUsers() {
-    let users = await UserModel.find()
+    let users = await User.find()
     return users
 }
 
 async function deleteUser(payload) {
-     let user = UserModel.findOneAndDelete({email:payload.email})
+     let user = User.findOneAndDelete({email:payload.email})
      if(user){
          return {
              "status":"deleted"

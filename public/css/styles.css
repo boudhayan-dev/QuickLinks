@@ -36,9 +36,9 @@ body{
     font-weight: 500;
 }
 
-.card-button{
+/* .card-button{
     width: 130px;
-}
+} */
 
 
 /* .card-img-top{
@@ -69,9 +69,10 @@ body{
     opacity:0.9 !important;
 }
 
-#error-message{
+#error-message, #linkAddError {
     color: red;
     font-weight: bold;
+    display: block;
 }
 
 
@@ -86,3 +87,5 @@ body{
     display: block;
     text-align: center;
 }
+
+

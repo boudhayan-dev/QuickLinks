@@ -8,9 +8,9 @@
                 <div class="modal-content">
                     <form class="signupForm text-center border border-light p-5" action="/login" method="POST">
                         <h3 class="mb-4" style="font-weight: bold; color: #17a2b8;">Login</h3>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Username" required>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
                         <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
-                            Enter your username
+                            Enter your email
                         </small>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                         <small id="helpTextBlock" class="help-text form-text text-muted mb-4">
@@ -23,7 +23,7 @@
                         </small>
                         
                         {{#if errorMessage}}
-                        <span id="error-message">{{errorMessage}}</span>
+                        <small id="error-message" class="form-text mb-4">{{errorMessage}}</small>
                         {{/if}}
 
                         

@@ -1,23 +1,16 @@
+// Change the input fiel to file name
 $('#pageImage').on('change', function (e) {
     let fileName = e.target.files[0].name;
     $('.custom-file-label').html(fileName);
 })
 
 
-
-// const toBase64 = file => new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = error => reject(error);
-// });
-
 async function makeRequest(url, config) {
     try {
         const response = await fetch(url, config);
         return {
             "status": response.status,
-            "payload": (response.status == 200 ? "" : await response.json())
+            "payload": await response.json()
         };
     }
     catch (error) {
@@ -39,24 +32,24 @@ const toBase64 = file => new Promise((resolve, reject) => {
 
 
 
+
+// This will asynchronously post new LINK request
 $(".submitForm").submit(async function (oEvent) {
     oEvent.preventDefault()
-    let errorMessage = document.getElementById("error-message");
-    errorMessage.style.visibility = "hidden";
-
+    let errorMessage = document.getElementById("linkAddError");
     let link = document.getElementById("pageLink").value;
     let name = document.getElementById("pageName").value;
     let description = document.getElementById("pageDescription").value;
-    let image = document.getElementById("pageImage").files[0];
-    if(image){
-        image = await toBase64(image);
+    let imageB64 = document.getElementById("pageImage").files[0];
+    if (imageB64){
+        imageB64 = await toBase64(imageB64);
     }
     else{
-        image="";
+        imageB64="";
     }
     
     if (link.length > 0 && name.length > 0) {
-        let payload = { link, name, description, image };
+        let payload = { link, name, description, imageB64 };
         let config = {
             method: "POST",
             headers: {
@@ -65,25 +58,38 @@ $(".submitForm").submit(async function (oEvent) {
             body: JSON.stringify(payload)
         }
         let response = await makeRequest("/add", config)
-        if (response.status == "200") {
-            console.log("Successfully added new link")
-            $('#addLinkModal').modal('hide')
+        if ("errorMessage" in response.payload) {
+            errorMessage.innerText = response.payload.errorMessage
+            return
     
         }
-        else {
-            errorMessage.style.visibility = "visible";
-            console.log("There was an error adding new link")
-        }
-
+        location.reload()
     }
     else {
-        console.log("Please provide link and name")
+        errorMessage.innerText = "Please provide link details"
     }
 
 })
 
 
-// async function Main() {
-//     const file = document.querySelector('#myfile').files[0];
-//     console.log(await toBase64(file));
-// }
+
+// Delete a link
+async function deleteLink(button) {
+    let link = button.getAttribute('name').trim()
+    let payload = { link };
+    let config = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    }
+    let response = await makeRequest("/deleteLink", config)
+    console.log(response.payload)
+    if ("errorMessage" in response.payload) {
+        console.log(response.payload.errorMessage)
+        return
+
+    }
+    location.reload()
+}
