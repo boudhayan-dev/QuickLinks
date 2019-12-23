@@ -20,8 +20,8 @@ app.set("views", viewsPath)
 app.use(express.static(staticPath))
 hbs.registerPartials(partialsPath)
 // Accept json as well as form data
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.json({ limit: "5mb"}))
+app.use(express.urlencoded({ extended: true,  limit: '5mb' }))
 
 
 // Connect to mongodb
