@@ -15,6 +15,8 @@ const viewsPath = path.join(__dirname, "../templates/views")
 const partialsPath = path.join(__dirname, "../templates/partials")
 
 
+let PORT = process.env.PORT || 3000
+
 app.set("view engine", "hbs")
 app.set("views", viewsPath)
 app.use(express.static(staticPath))
@@ -45,7 +47,7 @@ app.use(session({
 // Register the routes
 app.use("/", router)
 
-app.listen(3000, () => {
-    console.log("Started on port 3000");
+app.listen(PORT, () => {
+    console.log("Started on port " + PORT);
 
 })
